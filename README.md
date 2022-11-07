@@ -147,9 +147,11 @@ Uma vez que a comunicação está livre de dados aleatórios, pode-se requisitar
 
 Os dados são requisitados através da interação com o usuário. Há 3 opções possíveis: '1' para solicitar o estado atual da NodeMCU, '2' para obter o estado atual do sensor digital e '3' para obter o valor registrado pelo sensor, cada opção escolhida é enviada para o NodeMCU através da instrução _serialPutchar_. O próximo passo é captar a informação devolvida ao UART, porém, é necessário um pequeno _sleeping_ durante a execução devido a rapidez da comunicação. Esta função de _sleeping_ é feita manualmente através de um contador de 0 a 1 bilhão. 
 
+<p align="center">
+	<img src="https://user-images.githubusercontent.com/88406625/200367482-8b8d778f-42f9-460d-9f2f-e2578a0674b2.png">
+</p>
 
-
-
+Por fim, requisita-se os dados devolvidos pela NodeMCU e printa-se na tela do visor LCD utilizando os recursos em Assembly integrados ao código em C.
 
 
 # Como executar
