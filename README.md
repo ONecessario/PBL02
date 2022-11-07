@@ -32,9 +32,6 @@ Segue abaixo a estrutura de diretórios do projeto
 ## Hardware
 - Raspberry Pi 0
 
-## Arquitetura
-- ARMv6
-
 ## Sistema Operacional
 - Windows 10
 - Ubuntu 
