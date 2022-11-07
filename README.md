@@ -137,7 +137,11 @@ Após o mapeamento feito anteriormente, já é possível realizar a comunicaçã
 Para ignorar os caracteres aleatórios, é enviado uma palavra-chave 'UNLOCK'. A ideia desta palavra-chave é que, após ser lida completamente, a comunicação está limpa e pode-se requisitar dados da NodeMCU sem risco de receber informações errôneas. O algoritmo de verificação é consideravelmente simples. O objetivo é permanecer em _looping_ enquanto a chave não for enviada. Para isso, requisita-se um caractere do NodeMCU com a instrução _serialGetchar_ e este é comparado com o atual caractere da palavra 'unlock'. Se houver igualdade, o contador é iterado e avança para a próxima comparação, caso contrário, o contador é zerado e a comparação volta para o primeiro passo. O motivo disso é óbvio: Querendo ou não, a palavra-chave é uma maneira arriscada de resolver o problema em questão, pois há uma pequena, mas real, probabilidade do lixo enviado a UART coincidir com os caracteres estabelecidos em 'unlock'.
 Uma vez que a comunicação está livre de dados aleatórios, pode-se requisitar as informações do NodeMCU. 
 
+<p align="center">
+	<img src="![image](https://user-images.githubusercontent.com/88406625/200346074-bd11161d-0018-4ffb-a543-f1851c14f4d8.png)" title="Algoritmo de verificação">
+</p>
 
+Os dados são requisitados através da interação com o usuário. Há 3 opções possíveis: '1' para solicitar o estado atual da NodeMCU, '2' para obter o estado atual do sensor digital e '3' para obter o valor registrado pelo sensor. 
 
 # Como executar
 
