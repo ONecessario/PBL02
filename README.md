@@ -34,7 +34,7 @@ Segue abaixo a estrutura de diretórios do projeto
 Possui a macro open_file para abertura de arquivos. Recebe no R0, o descritor do arquivo aberto, no R1, o modo de abertura do arquivo.
 
 #### lib/utils.s
-Possui a macro nanosleep para fazer o programa parar durante o tempo específicado. R0 é um ponteiro para quantidade de segundos e R1 é um ponteiro para quantidade de nanossegundos.
+Possui a macro _nanosleep_ para fazer o programa parar durante o tempo específicado. R0 é um ponteiro para quantidade de segundos e R1 é um ponteiro para quantidade de nanossegundos.
 #### lib/gpio.s
 Possui macros para configurar pinos como entrada e saída, alterar o nível lógico no modo de saída e ler o nível lógico em determinado pino. A sessão de pinos tem seu array configurado da seguinte maneira:
 #### lib/lcd.s
@@ -45,7 +45,7 @@ Programa principal para execução do contador. O valor do contador fica registr
 
 # Makefile
 
-Para facilitar a construção do programa, existe um makefile dentro da pasta rpi, onde é possível executar:
+Para facilitar a construção do programa, existe um _makefile_ dentro da pasta **rpi**, onde é possível executar:
 `$ make uart`
 Para construção do executável. Logo em seguida basta utilizar:
 `$ sudo ./uartx`
@@ -99,7 +99,7 @@ Os bits mais significativos B7-B3, indicam qual sensor vai ser executado o coman
 
 
 # Arquitetura
-Como mostrado na figura, temos a SBC controlando a exibição de informações no display, enquanto se comunica através da uart com a NodeMCU que possui e faz a aquisição dos dados dos sensores.
+Como mostrado na figura, temos a SBC controlando a exibição de informações no display, enquanto se comunica através da UART com a NodeMCU que possui e faz a aquisição dos dados dos sensores.
 
 ![image](https://user-images.githubusercontent.com/26310730/200289359-d2724ca6-85cb-48ff-bf14-99044af3eb83.png)
 
@@ -113,7 +113,7 @@ A NodeMCU fica constantemente ouvindo o seu canal RX, e toda vez que recebe um p
 
 ## Raspberry PI
 
-Pode-se emitir os comandos através do terminal, onde são enviados e processados pela NodeMCU através de comunicação serial utilizando o protocolo UART. Como o processo é assíncrono, é realizada uma espera ocupada de até 1 segundo (aproximadamente), de forma que se não houver nenhum tipo de resposta, é dado como um erro de tempo excedido (timeout).  vez que a informação retorne, ela é exibida no terminal e no display de LCD caso esteja conectado.
+Pode-se emitir os comandos através do terminal, onde são enviados e processados pela NodeMCU através de comunicação serial utilizando o protocolo UART. Como o processo é assíncrono, é realizada uma espera ocupada de até 1 segundo (aproximadamente), de forma que se não houver nenhum tipo de resposta, é dado como um erro de tempo excedido (_timeout_).  vez que a informação retorne, ela é exibida no terminal e no display de LCD caso esteja conectado.
 Devido a presença de sistema operacional na Raspberry Pi Zero, para realizar um acesso aos dispositivos presentes na placa, é necessário realizar o mapeamento de memória, onde é exigido a chamada de algumas system calls para realizar esse acesso. Para outros dispositivos, como o acionamento do relógio interno, o sistema operacional oferece uma interface amigável.
 
 Para estabelecer a comunicação UART, utilizaram-se as bibliotecas _wiringPi_ e _wiringSerial_ dedicadas a mapeamento de GPIOs em hardwares Raspberry. A taxa de transmissão foi definida como 9600. A imagem abaixo ilustra a função responsável por mapear e retornar o valor da porta serial que representa a mini UART.
