@@ -1,66 +1,100 @@
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
+#include <time.h>
 
 #include <wiringPi.h>
 #include <wiringSerial.h>
-
-#define BAUD_RATE 9600
-#define NODEMCU_STATE 3
-#define ANALOGIC 4
-#define DIGITAL 5
-#define LED 6
 
 extern void init();
 extern void write_char(char ch);
 extern void clear_display();
 
-int main (void) {
-	int serial_port;
-	init();
-	if ((serial_port = serialOpen ("/dev/ttyS0", BAUD_RATE)) < 0) {
-        fprintf (stderr, "Incapaz de abrir o dispositivo serial: %s\n", strerror (errno)) ;
-        return 1 ;
-  	}
+#define BAUD_RATE 9600
 
-  	if (wiringPiSetup () == -1) {
-        fprintf (stdout, "Incapaz de iniciar a biblioteca wiringPi: %s\n", strerror (errno)) ;
-        return 1;
-  	}
- 	while(1){
-		printf("Selecione entre estas opcoes:\n");
-		printf("1 - Estado Atual\n");
-		printf("2 - Digital\n");
-        printf("3 - Analogico\n\n");
-		int option = scanf("%i", &option);
-		if(serialDataAvail (serial_port) ) {
-			switch(option) {
-				case 1:
-                    read(serial_port, NODEMCU_STATE);
-				break;
+// Read message after secret code.
+int FLAG_READ = 0;
+char key[6] = {'u', 'n', 'l', 'o', 'c', 'k'};
 
-				case 2:
-                    read(serial_port, DIGITAL);
-				break;
+/**
+ * Initialize Uart
+ */ 
+int init_uart(){
+    int serial_port = serialOpen("/dev/ttyS0", BAUD_RATE);
+    if (serial_port < 0) {
+        fprintf(stderr, "Unable to open serial device: %s\n", strerror(errno));
+        return 0;
+    }
 
-				case 3:
-                    read(serial_port, ANALOGIC);
-				break;
-			}
-
-		}
-	}
-
+    if (wiringPiSetup() == -1) {
+        fprintf(stdout, "Unable to start wiringPi: %s\n", strerror(errno));
+        return 0;
+    }
+    return serial_port;
 }
 
-void read(int port, int option) {
-    serialPutchar(port, option);
-    sleep();
-    write(serialGetchar(port));
+/**
+ * Wait uart response
+ */
+int busy_wait(int serial_port){
+    int t = 0;
+    while(!serialDataAvail(serial_port) && t < 1e9) t++; 
+    if(t >= 1e9) {
+        printf("Timeout...\n");
+        return 0;
+    }
+    return serialDataAvail;
 }
 
-void write(char c) {
-    write_char(c);
-    printf("%d\n", c);
-    fflush(stdout);
+
+
+int main()
+{
+    printf("Initializing Display...\n");
+    init();
+    printf("Initializing Uart...\n");
+    int serial_port = init_uart();
+    if(!serial_port) return 1;
+    printf("Uart initialized\n");
+    printf("Reading secret code\n");
+    // Unlock
+    int i = 0;
+    while(i < 6){
+        if (serialDataAvail(serial_port)){
+            char byte = serialGetchar(serial_port); /* receive character serially*/
+            i = byte == key[i] ? i + 1 : 0;
+            fflush(stdout);
+        }
+    }
+    printf("Secret code found\n");
+ 
+    while(1){
+        printf("Digite um comando: ");
+        int cmd;
+        scanf("%d", &cmd);
+        clear_display();
+        char byte = cmd;
+        serialPutchar(serial_port, byte);
+        int response = busy_wait(serial_port);
+        if(!response) continue;
+        clear_display();
+        
+        char *msg = "sensor ";
+        for(int i=0;i<7;i++) write_char(msg[i]);
+        write_char('0' + (cmd>>3)/10);
+        write_char('0' + (cmd>>3)%10);
+        for(int i=0;i<11;i++) write_char(' ');
+        *msg = "valor "
+        for(int i=0;i<6;i++) write_char(msg[i]);
+
+        while(serialDataAvail(serial_port)){
+            char byte = serialGetchar(serial_port);
+            if(byte >= '0' && byte <= '9')
+                write_char(byte);
+            if(byte >= 0 && byte <= 9)
+                write_char(byte+'0');
+            printf("Response: %d\n", byte);
+        }
+      
+    }
 }
