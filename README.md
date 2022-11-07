@@ -31,6 +31,7 @@ Segue abaixo a estrutura de diretórios do projeto
 
 ## Hardware
 - Raspberry Pi 0
+- NodeMCU ESP8266
 
 ## Sistema Operacional
 - Windows 10
