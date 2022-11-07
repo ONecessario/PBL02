@@ -29,6 +29,26 @@ Segue abaixo a estrutura de diretórios do projeto
 
 ##### rpi/lib/ - Pasta com os módulos utilizados na solução
 
+## Hardware
+- Raspberry Pi 0
+
+## Arquitetura
+- ARMv6
+
+## Sistema Operacional
+- Windows 10
+- Ubuntu 
+- Raspbian 
+
+## Software
+- Arduino IDE
+- GCC Compiler
+- VSCode
+
+## Linguagem de Programação
+- Assembly
+- C
+
 ## Bibliotecas
 #### lib/fileio.s
 Possui a macro open_file para abertura de arquivos. Recebe no R0, o descritor do arquivo aberto, no R1, o modo de abertura do arquivo.
