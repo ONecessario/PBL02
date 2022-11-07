@@ -50,26 +50,18 @@ int busy_wait(int serial_port){
 
 int main()
 {
-    printf("Initializing Display...\n");
     init();
-    printf("Initializing Uart...\n");
     int serial_port = init_uart();
     if(!serial_port) return 1;
-    printf("Uart initialized\n");
-    printf("Reading secret code\n");
-    // Unlock
     int i = 0;
     while(i < 6){
         if (serialDataAvail(serial_port)){
-            char byte = serialGetchar(serial_port); /* receive character serially*/
+            char byte = serialGetchar(serial_port);
             i = byte == key[i] ? i + 1 : 0;
             fflush(stdout);
         }
     }
-    printf("Secret code found\n");
- 
     while(1){
-        printf("Digite um comando: ");
         int cmd;
         scanf("%d", &cmd);
         clear_display();
@@ -93,7 +85,6 @@ int main()
                 write_char(byte);
             if(byte >= 0 && byte <= 9)
                 write_char(byte+'0');
-            printf("Response: %d\n", byte);
         }
       
     }
