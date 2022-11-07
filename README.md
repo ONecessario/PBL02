@@ -141,7 +141,16 @@ Uma vez que a comunicação está livre de dados aleatórios, pode-se requisitar
 	<img src="https://user-images.githubusercontent.com/88406625/200364662-d3d39a32-def1-452c-ac23-73d2e88e5b54.png">
 </p>
 
-Os dados são requisitados através da interação com o usuário. Há 3 opções possíveis: '1' para solicitar o estado atual da NodeMCU, '2' para obter o estado atual do sensor digital e '3' para obter o valor registrado pelo sensor. 
+<p align="center">
+	<img src="https://user-images.githubusercontent.com/88406625/200366087-98399ebd-4495-4ece-8f0b-50a7616943c9.png">
+</p>
+
+Os dados são requisitados através da interação com o usuário. Há 3 opções possíveis: '1' para solicitar o estado atual da NodeMCU, '2' para obter o estado atual do sensor digital e '3' para obter o valor registrado pelo sensor, cada opção escolhida é enviada para o NodeMCU através da instrução _serialPutchar_. O próximo passo é captar a informação devolvida ao UART, porém, é necessário um pequeno _sleeping_ durante a execução devido a rapidez da comunicação. Esta função de _sleeping_ é feita manualmente através de um contador de 0 a 1 bilhão. 
+
+
+
+
+
 
 # Como executar
 
