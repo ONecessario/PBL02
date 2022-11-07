@@ -127,11 +127,11 @@ A partir da instrução _serialOpen_ é possível obter o endereço através da 
 Após o mapeamento feito anteriormente, já é possível se comunicar com o NodeMCU. Porém, antes de tudo, é necessário realizar um tratamento de dados indesejáveis que são lançados aleatoriamente durante a execução da NodeMCU.
 
 <p align="center">
-	<img src="https://user-images.githubusercontent.com/88406625/200335688-ee59f3c6-0ff7-4d11-ac97-9ddbfbea5435.png" title="hover text">
+	<img src="https://user-images.githubusercontent.com/88406625/200335412-777454ea-c967-4cbb-a7d6-cd58076794dc.png" title="hover text">
 </p>
 
 <p align="center">
-	<img src="https://user-images.githubusercontent.com/88406625/200335412-777454ea-c967-4cbb-a7d6-cd58076794dc.png" title="hover text">
+	<img src="https://user-images.githubusercontent.com/88406625/200335688-ee59f3c6-0ff7-4d11-ac97-9ddbfbea5435.png" title="hover text">
 </p>
 
 Para ignorar os caracteres aleatórios, é enviado uma palavra chave 'UNLOCK'
