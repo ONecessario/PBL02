@@ -119,7 +119,7 @@ Devido a presença de sistema operacional na Raspberry Pi Zero, para realizar um
 Para estabelecer a comunicação UART, utilizaram-se as bibliotecas _wiringPi_ e _wiringSerial_ dedicadas a mapeamento de GPIOs em hardwares Raspberry. A taxa de transmissão foi definida como 9600. A imagem abaixo ilustra a função responsável por mapear e retornar o valor da porta serial que representa a mini UART.
 
 <p align="center">
-	![image](https://user-images.githubusercontent.com/88406625/200328393-a4d69181-1198-4f27-a3ae-87d95cec8df1.png)
+	<img src="https://user-images.githubusercontent.com/88406625/200328393-a4d69181-1198-4f27-a3ae-87d95cec8df1.png" title="hover text">
 </p>
 
 A partir da instrução _serialOpen_ é possível obter o endereço através da porta **ttyS0** a qual a UART está atribuída. 
