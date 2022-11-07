@@ -138,7 +138,7 @@ Para ignorar os caracteres aleatórios, é enviado uma palavra-chave 'UNLOCK'. A
 Uma vez que a comunicação está livre de dados aleatórios, pode-se requisitar as informações do NodeMCU. 
 
 <p align="center">
-	<img src="![image](https://user-images.githubusercontent.com/88406625/200346074-bd11161d-0018-4ffb-a543-f1851c14f4d8.png)" title="Algoritmo de verificação">
+	<img src="https://user-images.githubusercontent.com/88406625/200364264-d62e550c-698b-450a-b309-27c07b037b22.png" title="Algoritmo de verificação">
 </p>
 
 Os dados são requisitados através da interação com o usuário. Há 3 opções possíveis: '1' para solicitar o estado atual da NodeMCU, '2' para obter o estado atual do sensor digital e '3' para obter o valor registrado pelo sensor. 
