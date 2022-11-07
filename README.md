@@ -124,7 +124,7 @@ Para estabelecer a comunicação UART, utilizam-se as bibliotecas _wiringPi_ e _
 
 A partir da instrução _serialOpen_ é possível obter o endereço através da porta **ttyS0** a qual a UART está atribuída, este, é salvo na variável inteira _serial_port_. Caso o valor obtido seja negativo, isso significa que não foi possível abrir o dispositivo conectado, uma mensagem de enviada ao usuário e a função é encerrada. Outro possível erro é falhar em abrir a biblioteca _wiringPI_, o qual pode ser detectado através do valor '-1' ao chamar a instrução _wiringPiSetup_. Uma vez que se obtém a porta com sucesso, isto é, sem falhas associadas a comunicação ou a biblioteca em si, o valor é retornado.
 
-Após o mapeamento feito anteriormente, já é possível se comunicar com o NodeMCU. Porém, antes de tudo, é necessário realizar um tratamento de dados indesejáveis que são lançados aleatoriamente durante a execução da NodeMCU.
+Após o mapeamento feito anteriormente, já é possível realizar a comunicação serial. Porém, antes de tudo, é necessário realizar um tratamento de dados indesejáveis que são lançados aleatoriamente durante a execução da NodeMCU.
 
 <p align="center">
 	<img src="https://user-images.githubusercontent.com/88406625/200335412-777454ea-c967-4cbb-a7d6-cd58076794dc.png" title="hover text">
@@ -134,7 +134,7 @@ Após o mapeamento feito anteriormente, já é possível se comunicar com o Node
 	<img src="https://user-images.githubusercontent.com/88406625/200335688-ee59f3c6-0ff7-4d11-ac97-9ddbfbea5435.png" title="hover text">
 </p>
 
-Para ignorar os caracteres aleatórios, é enviado uma palavra chave 'UNLOCK'. A ideia desta palavra-chave é que após ser lida completamente a comunicação está limpa e pode-se requisitar dados da NodeMCU sem risco de receber informações errôneas. O algoritmo de verificação é consideravelmente simples. O objetivo é permanecer em _looping_ enquanto a chave não for enviada. Para isso, requisita-se um caractere do NodeMCU com a instrução _serialGetchar_ e este é comparado com o atual caractere da palavra 'unlock'. Se houver igualdade, o contador é iterado e avança para a próxima comparação, caso contrário, o contador é zerado e a comparação volta para o primeiro passo. O motivo disso é óbvio, querendo ou não, a palavra-chave é uma maneira arriscada de resolver o problema em questão, há uma pequena, mas real, probabilidade do lixo enviado a UART coincidir com os caracteres estabelecidos em 'unlock'. 
+Para ignorar os caracteres aleatórios, é enviado uma palavra chave 'UNLOCK'. A ideia desta palavra-chave é que após ser lida completamente a comunicação está limpa e pode-se requisitar dados da NodeMCU sem risco de receber informações errôneas. O algoritmo de verificação é consideravelmente simples. O objetivo é permanecer em _looping_ enquanto a chave não for enviada. Para isso, requisita-se um caractere do NodeMCU com a instrução _serialGetchar_ e este é comparado com o atual caractere da palavra 'unlock'. Se houver igualdade, o contador é iterado e avança para a próxima comparação, caso contrário, o contador é zerado e a comparação volta para o primeiro passo. O motivo disso é óbvio: Querendo ou não, a palavra-chave é uma maneira arriscada de resolver o problema em questão, pois há uma pequena, mas real, probabilidade do lixo enviado a UART coincidir com os caracteres estabelecidos em 'unlock'.
 
 # Como executar
 
