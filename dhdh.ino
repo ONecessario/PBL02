@@ -99,18 +99,12 @@ void setup() {
     }
   });
   ArduinoOTA.begin();
-  //Serial.println("Ready");
-  //Serial.print("IP address: ");
-  //Serial.println(WiFi.localIP());
   
   digitalWrite(LED_BUILTIN, HIGH);
   digitalWrite(D0, HIGH);
-  for(int i=0;i<5;i++)
-    Serial.write(data[i]);
-  
+  for(int i=0;i<5;i++) Serial.write(data[i]);
   
   for(int i=0;i<6;i++) Serial.write(key[i]);
-  //Serial.print("unlock");
 }
 
 
