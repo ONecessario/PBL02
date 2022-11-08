@@ -133,8 +133,6 @@ void loop() {
         if(cmd) {
             switch(cmd){
                 case CMD_NODEMCU_STATUS: Serial.write('0'); break;
-                //case CMD_SENSOR_STATUS: Serial.write('1'); break;
-                //case CMD_SENSOR_READ: Serial.write('2'); break;
                 case CMD_SENSOR_STATUS: Serial.write(SENSOR_STATUS[sensor]); break;
                 case CMD_SENSOR_READ: Serial.write(SENSOR_VALUE[sensor]); break;
             }
