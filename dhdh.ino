@@ -52,35 +52,20 @@ void setup() {
   
   Serial.begin(9600);
   
-  // Sensors
   pinMode(D1, INPUT);
   pinMode(D2, INPUT);
   pinMode(A0, INPUT);
   pinMode(D0, OUTPUT);
-
-  
-  //Serial.println("Booting");
+    
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   
   while (WiFi.waitForConnectResult() != WL_CONNECTED) {
-    //Serial.println("Connection Failed! Rebooting...");
     delay(5000);
     ESP.restart();
   }
   ArduinoOTA.setHostname("ESP-10.0.0.109");
-  // Port defaults to 8266
-  // ArduinoOTA.setPort(8266);
-
-  // Hostname defaults to esp8266-[ChipID]
-  //ArduinoOTA.setHostname("ESP Net");
-
-  // No authentication by default
-  // ArduinoOTA.setPassword("admin");
-
-  // Password can be set with it's md5 value as well
-  // MD5(admin) = 21232f297a57a5a743894a0e4a801fc3
-  // ArduinoOTA.setPasswordHash("21232f297a57a5a743894a0e4a801fc3");
+  
 
   ArduinoOTA.onStart([]() {
     String type;
